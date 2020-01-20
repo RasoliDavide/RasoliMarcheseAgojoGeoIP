@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var requestIp = require('request-ip');
-var httpReqSender = require('axios');
+var httpReqSender = require('request');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     if(req.body.ip == null)
@@ -19,30 +19,23 @@ router.post('/getIP', function(req, res, next)
 {
     console.log(req.body);
     let ip = req.body.ip;
-    var dati = null;
-    httpReqSender.get(`http://ip-api.com/json/${ip}`)
-        .then(response => {
-        console.log(response.data.url);
-        console.log(response.data.body);
+    httpReqSender(`http://ip-api.com/json/${ip}?16902137`, (error, response, body) => 
+    {
+        console.log(body)
+        res.send(body)
     })
-    .catch(error => {
-        console.log(error);
-    });
-    res.send(req.body);
+    
 })
 router.get('/getIP', function(req, res, next)
 {
     console.log(req.body);
     let ip = req.body.ip;
     var dati = null;
-    httpReqSender.get(`ip-api.com/json/21.0.8.6?fields=124921`)
-        .then(response => {
-        console.log(response.data.url);
-        console.log(response.data.body);
+    httpReqSender('http://ip-api.com/json/24.48.0.1', (error, response, body) => 
+    {
+        console.log(body)
+        res.send(body)
     })
-    .catch(error => {
-        console.log(error);
-    });
-    res.send(req.body);
+    
 })
 module.exports = router;
