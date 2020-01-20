@@ -30,4 +30,19 @@ router.post('/getIP', function(req, res, next)
     });
     res.send(req.body);
 })
+router.get('/getIP', function(req, res, next)
+{
+    console.log(req.body);
+    let ip = req.body.ip;
+    var dati = null;
+    httpReqSender.get(`ip-api.com/json/21.0.8.6?fields=124921`)
+        .then(response => {
+        console.log(response.data.url);
+        console.log(response.data.body);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+    res.send(req.body);
+})
 module.exports = router;
