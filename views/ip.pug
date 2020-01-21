@@ -1,0 +1,28 @@
+doctype html
+html
+ head
+   title #{title}
+   link(rel='stylesheet', href='/css/style.css')
+   meta(name="viewport" content="width=device-width, initial-scale=1")
+ body
+   header.header
+         h1 #{title}
+   div.ip
+     div.ip-details
+       h1.ip-Country
+         | #{result.Country} 
+         p.ip-RegionName
+         | #{result.RegionName}
+         p.ip-City
+         | #{result.City}
+         p.ip-ZipCode
+         | #{result.ZipCode}
+         p.ip-Latitude
+         | #{result.Latitude}
+         p.ip-Longitude
+         | #{result.Longitude}
+         p.ip-Isp
+         | #{result.Isp}
+         p.ip-MobileQuery
+         | #{result.MobileQuery}
+       

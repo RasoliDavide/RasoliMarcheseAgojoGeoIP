@@ -3,7 +3,7 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}, your ip address is: #{ip}
-    h2 Retrive information about the inserted IP:
+    h2 Retrive information about the IP:
     form(action="/getIP" method="POST")
         input(name="ip" type="text")
         input(type="submit" value="Submit")
