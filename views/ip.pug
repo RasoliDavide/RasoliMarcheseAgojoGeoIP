@@ -2,27 +2,24 @@ doctype html
 html
  head
    title #{title}
-   link(rel='stylesheet', href='/css/style.css')
    meta(name="viewport" content="width=device-width, initial-scale=1")
  body
-   header.header
+   header
          h1 #{title}
-   div.ip
-     div.ip-details
-       h1.ip-Country
-         | #{result.Country} 
-         p.ip-RegionName
-         | #{result.RegionName}
-         p.ip-City
+   div
+     div
+       h1 Paese: #{result} 
+         p Regione #{result.regionName}
+         p
          | #{result.City}
-         p.ip-ZipCode
+         p
          | #{result.ZipCode}
-         p.ip-Latitude
+         p
          | #{result.Latitude}
-         p.ip-Longitude
+         p
          | #{result.Longitude}
-         p.ip-Isp
+         p
          | #{result.Isp}
-         p.ip-MobileQuery
+         p
          | #{result.MobileQuery}
        

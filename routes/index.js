@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var requestIp = require('request-ip');
 var httpReqSender = require('request');
+var path = require('path');
+router.use(express.static(path.join(__dirname, 'public')));
 /* GET home page. */
 router.get('/', function(req, res, next) {
     if(req.body.ip == null)
@@ -17,12 +19,12 @@ router.get('/', function(req, res, next) {
 });
 router.post('/getIP', function(req, res, next)
 {
-    console.log(req.body);
     let ip = req.body.ip;
-    httpReqSender(`http://ip-api.com/json/${ip}?16902137`, (error, response, body) => 
+    httpReqSender(`http://ip-api.com/json/${ip}?124921`, (error, response, body) => 
     {
-        console.log(body)
-        res.send(body)
+        let result = JSON.parse(body);
+        console.log(result.regionName);
+        res.render('ip', {title : body.query, result: result})
     })
     
 })
