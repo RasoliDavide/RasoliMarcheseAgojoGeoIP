@@ -1,25 +1,35 @@
 doctype html
 html
- head
-   title #{title}
-   meta(name="viewport" content="width=device-width, initial-scale=1")
- body
-   header
-         h1 #{title}
-   div
-     div
-       h1 Paese: #{result} 
-         p Regione #{result.regionName}
-         p
-         | #{result.City}
-         p
-         | #{result.ZipCode}
-         p
-         | #{result.Latitude}
-         p
-         | #{result.Longitude}
-         p
-         | #{result.Isp}
-         p
-         | #{result.MobileQuery}
-       
+  head
+    title #{title}
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+    h2 Retrive information about another IP:
+    form(action="/getIP" method="POST")
+        input(name="ip" type="text")
+        input(type="submit" value="Submit")
+
+    if result.status == 'success'
+      div
+        h3 Risultato della ricerca sull'ip: #{result.query}
+        p Country: #{result.country} 
+        p Region: #{result.regionName}
+        p City: #{result.city}
+        p Zip Code: #{result.zip}
+        p ISP: #{result.isp}
+        if result.mobile == true
+          p Is a mobile internet connection
+        else
+          p Isn't a mobile internet connection
+        if result.hosting == true
+          p This ip is a property of an hosting service
+        else
+          p This ip is not a property of an hosting service
+        iframe(width="500px" height="400" src=`https://www.google.com/maps/embed/v1/place?key=AIzaSyDwLv9Rh-feL2r1n-WQe20H1xb4kMKgQzA&q=${result.lat},${result.lon}`)
+    else 
+      if result.message == 'private range'
+        h2 Error: you inserted a private IP
+      else if result.message == 'reserved range'
+        h2 Error: you inserted a loopback IP
+      else if result.message == 'invalid query'
+        h2 Error: you inserted the IP in a wrong format

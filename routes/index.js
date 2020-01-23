@@ -20,10 +20,10 @@ router.get('/', function(req, res, next) {
 router.post('/getIP', function(req, res, next)
 {
     let ip = req.body.ip;
-    httpReqSender(`http://ip-api.com/json/${ip}?124921`, (error, response, body) => 
+    httpReqSender(`http://ip-api.com/json/${ip}?fields=16904185`, (error, response, body) => 
     {
         let result = JSON.parse(body);
-        console.log(result.regionName);
+        console.log(result);
         res.render('ip', {title : body.query, result: result})
     })
     
